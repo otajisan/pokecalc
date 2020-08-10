@@ -1,11 +1,12 @@
-from pokecalc import status
+import json
+from pokecalc import input, calc, pokemon, nature
 
 
-def test_raw_layer_calculation():
+def test_calculation():
     """
     Dragapult
 
-    [IV] H:88, A:120, B:75, C:100, D:75, S:142
+    [BS] H:88, A:120, B:75, C:100, D:75, S:142
     [EV] H:4, A: 252, S: 252
     [N] S:positive, D: negative
 
@@ -13,36 +14,24 @@ def test_raw_layer_calculation():
 
     :return:
     """
-    assert status.calc_status_hp(status.MetaData(_bs=88, _ev=4)) == 164
-    assert status.calc_status(status.MetaData(_bs=120, _ev=252)) == 172
-    assert status.calc_status(status.MetaData(_bs=75, _ev=0)) == 95
-    assert status.calc_status(status.MetaData(_bs=100, _ev=0)) == 120
-    assert status.calc_status(status.MetaData(_bs=75, _ev=0, _n=status.NATURE_NEGATIVE)) == 85
-    assert status.calc_status(status.MetaData(_bs=142, _ev=252, _n=status.NATURE_POSITIVE)) == 213
+    expected = json.dumps({'h': 164, 'a': 172, 'b': 95, 'c': 120, 'd': 85, 's': 213})
 
+    class Dragapult(pokemon.Pokemon):
+        def __init__(self):
+            super(Dragapult, self).__init__(_bs_h=88, _bs_a=120, _bs_b=75, _bs_c=100, _bs_d=75,
+                                            _bs_s=142)
 
-def test_high_layer_calculation():
-    """
-    Dragapult
-
-    [IV] H:88, A:120, B:75, C:100, D:75, S:142
-    [EV] H:4, A: 252, S: 252
-    [N] S:positive, D: negative
-
-    [RV] H:164, A: 172, B:95, C: 120, D:85, S: 213
-
-    :return:
-    """
-    expected = {'h': 164, 'a': 172, 'b': 95, 'c': 120, 'd': 85, 's': 213}
-    st = status.Status(
-        _h=status.H(_bs=88, _ev=4),
-        _a=status.A(_bs=120, _ev=252),
-        _b=status.B(_bs=75),
-        _c=status.C(_bs=100),
-        _d=status.D(_bs=75, _n=status.NATURE_NEGATIVE),
-        _s=status.S(_bs=142, _ev=252, _n=status.NATURE_POSITIVE)
+    p = Dragapult()
+    n = nature.Naive()
+    input_data = input.Input(
+        _h=input.H(_ev=4),
+        _a=input.A(_ev=252),
+        _b=input.B(),
+        _c=input.C(),
+        _d=input.D(),
+        _s=input.S(_ev=252)
     )
 
-    actual = st.calc()
+    actual = calc.calc(_pokemon=p, _nature=n, _input=input_data).to_json()
 
     assert actual == expected
