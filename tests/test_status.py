@@ -13,12 +13,12 @@ def test_raw_layer_calculation():
 
     :return:
     """
-    assert status.h(status.MetaData(_bs=88, _ev=4)) == 164
-    assert status.a(status.MetaData(_bs=120, _ev=252)) == 172
-    assert status.b(status.MetaData(_bs=75, _ev=0)) == 95
-    assert status.c(status.MetaData(_bs=100, _ev=0)) == 120
-    assert status.d(status.MetaData(_bs=75, _ev=0, _n=status.NATURE_NEGATIVE)) == 85
-    assert status.s(status.MetaData(_bs=142, _ev=252, _n=status.NATURE_POSITIVE)) == 213
+    assert status.calc_status_hp(status.MetaData(_bs=88, _ev=4)) == 164
+    assert status.calc_status(status.MetaData(_bs=120, _ev=252)) == 172
+    assert status.calc_status(status.MetaData(_bs=75, _ev=0)) == 95
+    assert status.calc_status(status.MetaData(_bs=100, _ev=0)) == 120
+    assert status.calc_status(status.MetaData(_bs=75, _ev=0, _n=status.NATURE_NEGATIVE)) == 85
+    assert status.calc_status(status.MetaData(_bs=142, _ev=252, _n=status.NATURE_POSITIVE)) == 213
 
 
 def test_high_layer_calculation():
