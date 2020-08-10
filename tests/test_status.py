@@ -35,3 +35,45 @@ def test_calculation():
     actual = calc.calc(_pokemon=p, _nature=n, _input=input_data).to_json()
 
     assert actual == expected
+
+
+def test_Talonflame():
+    expected = json.dumps({'h': 153, 'a': 146, 'b': 92, 'c': 84, 'd': 89, 's': 178})
+
+    class Talonflame(pokemon.Pokemon):
+        def __init__(self):
+            super(Talonflame, self).__init__(78, 81, 71, 74, 69, 126)
+
+    assert calc.calc(
+        _pokemon=Talonflame(),
+        _nature=nature.Adamant(),
+        _input=input.Input(
+            _h=input.H(),
+            _a=input.A(_ev=252),
+            _b=input.B(_ev=4),
+            _c=input.C(),
+            _d=input.D(),
+            _s=input.S(_ev=252)
+        )
+    ).to_json() == expected
+
+
+def test_Porygon2():
+    expected = json.dumps({'h': 191, 'a': 90, 'b': 156, 'c': 125, 'd': 115, 's': 82})
+
+    class Porygon2(pokemon.Pokemon):
+        def __init__(self):
+            super(Porygon2, self).__init__(85, 80, 90, 105, 95, 60)
+
+    assert calc.calc(
+        _pokemon=Porygon2(),
+        _nature=nature.Bold(),
+        _input=input.Input(
+            _h=input.H(_ev=244),
+            _a=input.A(),
+            _b=input.B(_ev=252),
+            _c=input.C(),
+            _d=input.D(),
+            _s=input.S(_ev=12)
+        )
+    ).to_json() == expected

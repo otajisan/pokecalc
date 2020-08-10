@@ -2,11 +2,11 @@ from pokecalc import status
 
 
 def calc_status_hp(bs, meta) -> int:
-    return int((bs * 2 + meta.iv + meta.ev / 4) * meta.lv / 100 + meta.lv + 10)
+    return int(int((bs * 2 + meta.iv + int(meta.ev / 4)) * meta.lv / 100) + meta.lv + 10)
 
 
 def calc_status(bs, n, meta) -> int:
-    return int(((bs * 2 + meta.iv + meta.ev / 4) * meta.lv / 100 + 5) * n)
+    return int((int((bs * 2 + meta.iv + int(meta.ev / 4)) * meta.lv / 100) + 5) * n)
 
 
 def calc(_pokemon, _nature, _input):
