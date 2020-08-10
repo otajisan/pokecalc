@@ -1,4 +1,4 @@
-from poetry_example import __version__
+from pokecalc import __version__
 
 
 def test_version():
