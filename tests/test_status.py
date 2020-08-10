@@ -35,12 +35,12 @@ def test_high_layer_calculation():
     """
     expected = {'h': 164, 'a': 172, 'b': 95, 'c': 120, 'd': 85, 's': 213}
     st = status.Status(
-        _h=status.MetaData(_bs=88, _ev=4),
-        _a=status.MetaData(_bs=120, _ev=252),
-        _b=status.MetaData(_bs=75),
-        _c=status.MetaData(_bs=100),
-        _d=status.MetaData(_bs=75, _n=status.NATURE_NEGATIVE),
-        _s=status.MetaData(_bs=142, _ev=252, _n=status.NATURE_POSITIVE)
+        _h=status.H(_bs=88, _ev=4),
+        _a=status.A(_bs=120, _ev=252),
+        _b=status.B(_bs=75),
+        _c=status.C(_bs=100),
+        _d=status.D(_bs=75, _n=status.NATURE_NEGATIVE),
+        _s=status.S(_bs=142, _ev=252, _n=status.NATURE_POSITIVE)
     )
 
     actual = st.calc()

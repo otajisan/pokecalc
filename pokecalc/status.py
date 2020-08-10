@@ -95,3 +95,27 @@ class MetaData:
         self.iv = _iv
         self.lv = _lv
         self.n = _n
+
+
+class H(MetaData):
+    pass
+
+
+class A(MetaData):
+    pass
+
+
+class B(MetaData):
+    pass
+
+
+class C(MetaData):
+    pass
+
+
+class D(MetaData):
+    pass
+
+
+class S(MetaData):
+    pass
